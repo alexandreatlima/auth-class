@@ -88,4 +88,18 @@ userRouter.put("/", isAuth, attachCurrentUser, async (req, res) => {
   }
 });
 
+userRouter.get("/:userId", isAuth, async (req, res) => {
+  try {
+    const user = await UserModel.findOne(
+      { _id: req.params.userId },
+      { passwordHash: 0 }
+    ).populate("posts");
+
+    return res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(Error);
+  }
+});
+
 export { userRouter };

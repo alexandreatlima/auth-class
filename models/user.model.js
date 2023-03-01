@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 const userSchema = new Schema({
   name: { type: String, required: true, trim: true },
@@ -12,6 +12,7 @@ const userSchema = new Schema({
   passwordHash: { type: String, required: true },
   role: { type: String, enum: ["ADMIN", "USER"], default: "USER" },
   createdAt: { type: Date, default: Date.now() },
+  posts: [{ type: Types.ObjectId, ref: "Post" }],
 });
 
 export const UserModel = model("User", userSchema);
