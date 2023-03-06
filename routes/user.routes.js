@@ -88,6 +88,10 @@ userRouter.put("/", isAuth, attachCurrentUser, async (req, res) => {
   }
 });
 
+userRouter.get("/profile", isAuth, attachCurrentUser, (req, res) => {
+  return res.status(200).json(req.currentUser);
+});
+
 userRouter.get("/:userId", isAuth, async (req, res) => {
   try {
     const user = await UserModel.findOne(
@@ -101,5 +105,8 @@ userRouter.get("/:userId", isAuth, async (req, res) => {
     return res.status(500).json(Error);
   }
 });
+
+// UPDATE
+// DELETE
 
 export { userRouter };

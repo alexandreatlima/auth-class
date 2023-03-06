@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import express from "express";
 import { connectToDB } from "./config/db.config.js";
 import { postRouter } from "./routes/post.routes.js";
+import { uploadImageRouter } from "./routes/uploadImage.routes.js";
 import { userRouter } from "./routes/user.routes.js";
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/uploadImage", uploadImageRouter);
 
 app.listen(Number(process.env.PORT), () => {
   console.log(`Server up and running at port ${process.env.PORT}`);

@@ -5,6 +5,7 @@ const postSchema = new Schema({
   body: { type: String, required: true },
   picture: { type: String },
   creator: { type: Types.ObjectId, ref: "User" },
+  comments: [{ type: Types.ObjectId, ref: "Comment" }],
 });
 
 export const PostModel = model("Post", postSchema);
